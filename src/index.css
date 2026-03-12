@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 5%;
+    --foreground: 210 40% 98%;
+    --card: 222 40% 8%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 40% 8%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 330 81% 60%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217 33% 13%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 13%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 195 80% 55%;
+    --accent-foreground: 222 47% 5%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 30% 16%;
+    --input: 217 30% 16%;
+    --ring: 330 81% 60%;
+    --radius: 0.75rem;
+    --success: 142 71% 45%;
+    --warning: 38 92% 50%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(236, 72, 153, 0.12) 0%, transparent 60%),
+      hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-card/60 backdrop-blur-xl border border-border/50;
+  }
+
+  .glass-strong {
+    @apply bg-card/90 backdrop-blur-2xl border border-border/60;
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, #ec4899 0%, #fb7185 100%);
+  }
+
+  .gradient-text {
+    background-image: linear-gradient(135deg, #ec4899 0%, #fb7185 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gradient-border {
+    @apply relative;
+  }
+  .gradient-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-inherit p-px;
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.5), rgba(251, 113, 133, 0.5));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .glow {
+    box-shadow: 0 0 30px rgba(236, 72, 153, 0.25), 0 0 60px rgba(236, 72, 153, 0.1);
+  }
+
+  .glow-sm {
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.2);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 20px rgba(251, 113, 133, 0.3);
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:border-primary/30 hover:glow-sm hover:-translate-y-0.5;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium border;
+  }
+
+  .badge-primary {
+    @apply badge bg-primary/10 text-primary border-primary/20;
+  }
+
+  .badge-green {
+    @apply badge bg-green-400/10 text-green-400 border-green-400/20;
+  }
+
+  .badge-blue {
+    @apply badge bg-blue-400/10 text-blue-400 border-blue-400/20;
+  }
+
+  .badge-purple {
+    @apply badge bg-purple-400/10 text-purple-400 border-purple-400/20;
+  }
+
+  .badge-amber {
+    @apply badge bg-amber-400/10 text-amber-400 border-amber-400/20;
+  }
+
+  .badge-cyan {
+    @apply badge bg-cyan-400/10 text-cyan-400 border-cyan-400/20;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-primary {
+    @apply btn gradient-primary text-white hover:opacity-90 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary/80 text-foreground hover:bg-secondary border border-border;
+  }
+
+  .btn-ghost {
+    @apply btn text-muted-foreground hover:text-foreground hover:bg-secondary/50;
+  }
+
+  .btn-outline {
+    @apply btn border border-border text-foreground hover:bg-secondary/50;
+  }
+
+  .input {
+    @apply w-full px-3 py-2 rounded-lg bg-secondary/50 border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 transition-all;
+  }
+
+  .textarea {
+    @apply input resize-none;
+  }
+
+  .section-header {
+    @apply text-center mb-12;
+  }
+
+  .section-header h2 {
+    @apply text-3xl md:text-4xl font-bold mb-4;
+  }
+
+  .section-header p {
+    @apply text-muted-foreground max-w-2xl mx-auto;
+  }
+
+  /* Code block syntax highlight */
+  .code-block {
+    @apply font-mono text-sm bg-card/80 border border-border rounded-xl p-4 overflow-x-auto;
+  }
+
+  .shimmer-bg {
+    background: linear-gradient(90deg, 
+      hsl(var(--card)) 25%, 
+      hsl(var(--secondary)) 50%, 
+      hsl(var(--card)) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .text-gradient {
+    @apply gradient-text;
+  }
+
+  .rounded-inherit {
+    border-radius: inherit;
+  }
+}
